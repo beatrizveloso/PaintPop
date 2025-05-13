@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaintPop</title>
+  <link rel="icon" href="/src/images/pincel-icon.png">
+  <link rel="stylesheet" href="src/css/styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <button class="tool-btn" data-tool="pencil">
+        <img src="src/images/pencil.png" alt="Lápis" />
+      </button>
+      <button class="tool-btn" data-tool="brush">
+        <img src="src/images/brush.png" alt="Pincel" />
+      </button>
+      <button class="tool-btn" data-tool="bucket">
+        <img src="src/images/bucket.png" alt="Balde de tinta" />
+      </button>
+      <div class="color-panel" id="colorPanel" style="display: none;">
+        <div class="color-options" id="color-options"></div>
+        <input type="color" class="color-picker" id="customColor" />
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <div class="drawing-wrapper">
+        <div class="canvas-container">
+          <canvas id="paintCanvas" width="500" height="500"></canvas>
+        </div>
+        <div class="buttons">
+          <button id="save-btn" class="action-button">✅ Pronto</button>
+          <a href="index.html" class="action-button">🏠 Home</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="src/js/script.js"></script>
+</body>
+</html>

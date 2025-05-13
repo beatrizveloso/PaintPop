@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PaintPop</title>
+  <link rel="icon" href="/src/images/pincel-icon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, #F86D7C, #F78381, #FED28D, #FED28D);
+      font-family: 'Baloo 2', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #b1085c;
+    }
+
+    #final-image {
+      max-width: 90%;
+      max-height: 60vh;
+      border: 5px dashed #ffb6c1;
+      margin-bottom: 30px;
+      background-color: white;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .btn {
+      font-size: 1.2rem;
+      padding: 15px 25px;
+      background-color: #ffcd4f;
+      border: 3px solid #000;
+      border-radius: 20px;
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ffe877;
+      transform: scale(1.05);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <h1>Sua Pintura Finalizada 🎨</h1>
+  <img id="final-image" src="" alt="Pintura salva">
+
+  <div class="buttons">
+    <a href="index.html" class="btn">🏠 Home</a>
+    <a id="download-btn" class="btn" download="minha-pintura.png">💾 Salvar Imagem</a>
+  </div>
+
+  <script>
+    const imageData = localStorage.getItem('paintedImage');
+    const imgElement = document.getElementById('final-image');
+    const downloadLink = document.getElementById('download-btn');
+
+    if (imageData) {
+      imgElement.src = imageData;
+      downloadLink.href = imageData;
+    } else {
+      imgElement.alt = "Nenhuma pintura encontrada.";
+    }
+
+    function launchConfetti() {
+      confetti({
+        particleCount: 150,
+        spread: 90,
+        origin: { x: 0.5, y: 0.5 },
+        colors: ['#ffcd4f', '#ffb6c1', '#F86D7C', '#F78381'],
+        scalar: 2,
+      });
+    }
+
+    window.onload = launchConfetti;
+  </script>
+
+</body>
+</html>

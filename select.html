@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PaintPop</title>
+  <link rel="icon" href="/src/images/pincel-icon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, #FED28D, #F78381);
+      height: 100vh;
+      font-family: 'Baloo 2', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #b1085c;
+      margin-bottom: 40px;
+    }
+
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .image-container img {
+      width: 250px;
+      height: 400px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .image-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>Escolha um desenho</h1>
+
+  <div class="image-container">
+    <div class="image-container">
+      <a href="draw.html?img=bobbie-1.png"><img src="src/images/cavalete-1.png" alt="Cavalete 1"></a>
+      <a href="draw.html?img=bobbie-2.jpg"><img src="src/images/cavalete-2.png" alt="Cavalete 2"></a>
+      <a href="draw.html?img=bobbie-3.jpg"><img src="src/images/cavalete-3.png" alt="Cavalete 3"></a>
+      <a href="draw.html?img=bobbie-4.png"><img src="src/images/cavalete-4.png" alt="Cavalete 4"></a>
+    </div>
+    
+  </div>
+</body>
+</html>
