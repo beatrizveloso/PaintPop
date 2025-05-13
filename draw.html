@@ -28,11 +28,20 @@
     <main class="main-area">
       <div class="drawing-wrapper">
         <div class="canvas-container">
+          <canvas id="baseCanvas" width="500" height="500"></canvas>          
           <canvas id="paintCanvas" width="500" height="500"></canvas>
         </div>
+
         <div class="buttons">
-          <button id="save-btn" class="action-button">✅ Pronto</button>
-          <a href="index.html" class="action-button">🏠 Home</a>
+          <button id="undo-btn" class="action-button">
+            <img src="src/images/undo.png" alt="Desfazer" />
+          </button>
+          <button id="save-btn" class="action-button">
+            <img src="src/images/check.png" alt="Pronto" />
+          </button>
+          <a href="index.html" class="action-button">
+            <img src="src/images/home.png" alt="Home" />
+          </a>
         </div>
       </div>
     </main>
