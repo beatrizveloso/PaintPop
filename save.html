@@ -15,7 +15,11 @@
     }
 
     body {
-      background: linear-gradient(180deg, #F86D7C, #F78381, #FED28D, #FED28D);
+      background-image: url('src/images/background-select.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
       font-family: 'Baloo 2', cursive;
       display: flex;
       flex-direction: column;
@@ -34,8 +38,8 @@
 
     #final-image {
       max-width: 90%;
-      max-height: 60vh;
-      border: 5px dashed #ffb6c1;
+      max-height: 66vh;
+      border: 5px solid #ffb6c1;
       margin-bottom: 30px;
       background-color: white;
     }
@@ -65,7 +69,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-  <h1>Sua Pintura Finalizada 🎨</h1>
+  <h1>Sua Pintura Finalizada</h1>
   <img id="final-image" src="" alt="Pintura salva">
 
   <div class="buttons">
