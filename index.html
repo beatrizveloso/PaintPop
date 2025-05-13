@@ -14,21 +14,28 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       font-family: 'Baloo 2', cursive;
       background-image: url('src/images/background-home.webp');
       background-size: cover;
       background-position: center;
-      height: 100vh;
+      background-repeat: no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: floatBackground 20s infinite alternate ease-in-out;
+      animation: floatBackground 8s infinite alternate linear;
+      position: relative;
     }
 
     @keyframes floatBackground {
-      0% { background-position: center; }
-      100% { background-position: top 10px right 10px; }
+      0%   { background-position: center; }
+      100% { background-position: center top -20px; }
     }
 
     .home-container {
@@ -38,13 +45,8 @@
       border-radius: 30px;
       text-align: center;
       box-shadow: 5px 5px 0 #000;
-      margin-top: 280px;
-    }
-
-    .title {
-      font-size: 48px;
-      color: #ff69b4;
-      margin-bottom: 30px;
+      position: absolute;
+      top: 400px;
     }
 
     .start-button {

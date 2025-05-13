@@ -15,13 +15,17 @@
     }
 
     body {
-      background: linear-gradient(180deg, #FED28D, #F78381);
-      height: 100vh;
       font-family: 'Baloo 2', cursive;
+      background-image: url('src/images/background-select.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 40px 20px;
+      overflow-x: hidden;
     }
 
     h1 {
@@ -30,39 +34,109 @@
       margin-bottom: 40px;
     }
 
-    .image-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      justify-content: center;
-      margin-top: 30px;
+    .carousel-container {
+      width: 80%;
+      overflow: hidden;
+      position: relative;
     }
 
-    .image-container img {
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel img {
       width: 250px;
       height: 400px;
       cursor: pointer;
       border-radius: 10px;
+      margin-right: 20px;
       transition: transform 0.2s, box-shadow 0.3s;
     }
 
-    .image-container img:hover {
+    .carousel img:hover {
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #f9f871;
+      color: #333;
+      font-size: 2rem;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .arrow:hover {
+      background-color: #f0e141;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow:focus {
+      outline: none;
+    }
+
+    #prevBtn {
+      left: 20px;
+    }
+
+    #nextBtn {
+      right: 20px;
     }
   </style>
 </head>
 <body>
   <h1>Escolha um desenho</h1>
 
-  <div class="image-container">
-    <div class="image-container">
+  <div class="carousel-container">
+    <div class="carousel" id="carousel">
       <a href="draw.html?img=bobbie-1.png"><img src="src/images/cavalete-1.png" alt="Cavalete 1"></a>
       <a href="draw.html?img=bobbie-2.jpg"><img src="src/images/cavalete-2.png" alt="Cavalete 2"></a>
       <a href="draw.html?img=bobbie-3.jpg"><img src="src/images/cavalete-3.png" alt="Cavalete 3"></a>
       <a href="draw.html?img=bobbie-4.png"><img src="src/images/cavalete-4.png" alt="Cavalete 4"></a>
+      <a href="draw.html?img=capitao-1.png"><img src="src/images/cavalete-5.png" alt="Cavalete 5"></a>
+      <a href="draw.html?img=capitao-2.png"><img src="src/images/cavalete-6.png" alt="Cavalete 6"></a>
     </div>
-    
   </div>
+
+  <button class="arrow" id="prevBtn">&#8592;</button>
+  <button class="arrow" id="nextBtn">&#8594;</button>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let index = 0;
+
+    function moveCarousel() {
+      const itemWidth = carousel.querySelector('img').offsetWidth + 20;
+      carousel.style.transform = `translateX(-${index * itemWidth}px)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      const totalItems = carousel.children.length;
+      if (index < totalItems - 1) {
+        index++;
+        moveCarousel();
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (index > 0) {
+        index--;
+        moveCarousel();
+      }
+    });
+  </script>
 </body>
 </html>
