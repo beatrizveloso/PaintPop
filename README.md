@@ -10,7 +10,3 @@ O **PaintPop** é um aplicativo web interativo de pintura voltado para crianças
 - Pintura suave que respeita os contornos do desenho
 - Salvamento do desenho final em imagem
 - Interface amigável e responsiva
-
-## 📸 Pré-visualização
-
-![image](https://github.com/user-attachments/assets/b0717a15-06cb-42fe-8964-b3be38ae9ce0)
