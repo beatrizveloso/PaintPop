@@ -1,5 +1,9 @@
+const baseCanvas = document.getElementById("baseCanvas");
+const baseCtx = baseCanvas.getContext("2d");
+
 const canvas = document.getElementById("paintCanvas");
 const ctx = canvas.getContext("2d");
+
 const colorOptions = document.getElementById("color-options");
 const colorPicker = document.getElementById("customColor");
 const colorPanel = document.getElementById("colorPanel");
@@ -9,8 +13,21 @@ let currentTool = "pencil";
 let currentColor = "#000";
 let isDrawing = false;
 
-canvas.width = 500;
-canvas.height = 500;
+canvas.width = canvas.height = baseCanvas.width = baseCanvas.height = 500;
+
+const history = [];
+
+function saveState() {
+  history.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+  if (history.length > 20) history.shift(); // Limita o histórico
+}
+
+document.getElementById("undo-btn").addEventListener("click", () => {
+  if (history.length > 0) {
+    const prev = history.pop();
+    ctx.putImageData(prev, 0, 0);
+  }
+});
 
 function getImageFromURL() {
   const params = new URLSearchParams(window.location.search);
@@ -19,15 +36,12 @@ function getImageFromURL() {
 }
 
 const img = new Image();
-img.crossOrigin = "anonymous"; // necessário se usar imagens externas
+img.crossOrigin = "anonymous";
 img.src = getImageFromURL();
 img.onload = () => {
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  baseCtx.clearRect(0, 0, baseCanvas.width, baseCanvas.height);
+  baseCtx.drawImage(img, 0, 0, baseCanvas.width, baseCanvas.height);
 };
-
-canvas.addEventListener("mousedown", startDraw);
-canvas.addEventListener("mouseup", endDraw);
-canvas.addEventListener("mousemove", draw);
 
 document.querySelectorAll(".tool-btn").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -38,17 +52,7 @@ document.querySelectorAll(".tool-btn").forEach(btn => {
 });
 
 function updateBrushSize() {
-  switch (currentTool) {
-    case "pencil":
-      ctx.lineWidth = 1;
-      break;
-    case "brush":
-      ctx.lineWidth = 10;
-      break;
-    case "bucket":
-      ctx.lineWidth = 0;
-      break;
-  }
+  ctx.lineWidth = currentTool === "pencil" ? 1 : currentTool === "brush" ? 10 : 0;
 }
 
 function showColorOptions() {
@@ -70,11 +74,17 @@ colorPicker.addEventListener("change", () => {
   currentColor = colorPicker.value;
 });
 
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mouseup", endDraw);
+canvas.addEventListener("mousemove", draw);
+
 function startDraw(e) {
   if (currentTool === "bucket") {
+    saveState();
     fillArea(e.offsetX, e.offsetY);
     return;
   }
+  saveState();
   isDrawing = true;
   ctx.beginPath();
   ctx.moveTo(e.offsetX, e.offsetY);
@@ -119,15 +129,22 @@ function floodFill(imageData, x, y, targetColor, fillColor) {
 
   while (stack.length) {
     const [px, py] = stack.pop();
+    if (px < 0 || py < 0 || px >= width || py >= height) continue;
+
     const i = (py * width + px) * 4;
     const current = [data[i], data[i + 1], data[i + 2]];
 
     if (!colorsMatch(current, targetColor)) continue;
-    if (colorsMatch(current, [0, 0, 0])) continue; // Impede pintar linhas pretas
+    if (colorsMatch(current, [0, 0, 0])) continue;
 
     data[i] = fillColor[0];
     data[i + 1] = fillColor[1];
     data[i + 2] = fillColor[2];
+
+    stack.push([px + 1, py]);
+    stack.push([px - 1, py]);
+    stack.push([px, py + 1]);
+    stack.push([px, py - 1]);
   }
 }
 
@@ -142,7 +159,15 @@ function hexToRgb(hex) {
 }
 
 document.getElementById("save-btn").addEventListener("click", () => {
-  const dataURL = canvas.toDataURL();
+  const finalCanvas = document.createElement("canvas");
+  finalCanvas.width = canvas.width;
+  finalCanvas.height = canvas.height;
+  const finalCtx = finalCanvas.getContext("2d");
+
+  finalCtx.drawImage(canvas, 0, 0);
+  finalCtx.drawImage(baseCanvas, 0, 0);
+
+  const dataURL = finalCanvas.toDataURL();
   localStorage.setItem("paintedImage", dataURL);
   window.location.href = "save.html";
 });
