@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Baloo 2', sans-serif;
     background: #ffe0f1;
     display: flex;
     height: 100vh;
@@ -37,9 +37,18 @@ body {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
 
-.tool-btn img {
-    width: 100px;
-    height: 100px;
+.sidebar {
+    background: #f06292;
+    width: 140px; 
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 0;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
 }
 
 .main-area {
@@ -47,6 +56,84 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 290px; 
+}
+
+#undo-btn {
+    width: 110px;
+    height: 100px;
+    cursor: pointer;
+    margin-top: 100px;
+    margin-left: 50px; 
+}
+
+.tool-btn {
+    background: white;
+    border: none;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: filter 0.3s ease;
+}
+
+.tool-btn img {
+    width: 100px;
+    height: 100px;
+    transition: filter 0.3s ease;
+    filter: grayscale(100%);
+}
+
+.tool-btn.active img {
+    filter: grayscale(0%);
+}
+
+.tool-panel {
+    position: fixed;
+    left: 120px;
+    top: 0;
+    height: 100vh;
+    padding: 20px 10px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    background: #f8bbd0;
+    border-radius: 0 50px 50px 0;
+    overflow-y: auto;
+    margin-left: 30px;
+}
+
+.tool-panel.active {
+    display: flex;
+}
+
+.tool-panel::-webkit-scrollbar {
+    display: none;
+}
+
+.tool-panel img {
+    width: 180px;
+    height: 180px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.tool-panel img:hover {
+    transform: scale(1.1);
+}
+
+.color-picker {
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 .drawing-wrapper {
@@ -71,13 +158,13 @@ body {
 
 #paintCanvas {
     z-index: 1;
-  }
-  
-  #baseCanvas {
+}
+
+#baseCanvas {
     z-index: 2;
     pointer-events: none; 
-  }
-  
+}
+
 .color-options {
     display: flex;
     flex-direction: column;
@@ -114,13 +201,6 @@ body {
     height: 100%;
 }
 
-#undo-btn {
-    width: 90px;
-    height: 80px;
-    cursor: pointer;
-    margin-top: 100px   
-}
-
 .buttons {
     display: flex;
     flex-direction: column;
@@ -135,3 +215,75 @@ body {
     margin-left: 30px;
 }
 
+@media (max-width: 480px) {
+    .layout {
+        flex-direction: column; 
+        height: 100vh; 
+    }
+
+    .sidebar {
+        background: #f06292;
+        width: 120px;
+        padding: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border-radius: 0 50px 50px 0;
+        justify-content: center;
+        position: fixed;
+        height: 100vh;
+        z-index: 10;
+    }
+
+    .tool-btn {
+        width: 80px; 
+        height: 80px;
+    }
+
+    .tool-btn img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .canvas-container {
+        position: relative;
+        width: 100%;
+        height: 70vh; 
+        background: white;
+        border: 4px solid #000;
+        margin-left: 140px; 
+        margin-top: 30px; 
+    }
+
+    .canvas-container canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .tool-panel {
+        display: none; 
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        position: fixed;
+        bottom: 10px; 
+        width: 100%;
+        padding: 10px;
+        background-color: #ffe0f1;
+        z-index: 10;
+    }
+
+    .action-button {
+        width: 80px;
+        height: 80px;
+    }
+
+    .action-button img {
+        width: 100%;
+        height: 100%;
+    }
+}
