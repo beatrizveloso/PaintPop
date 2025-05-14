@@ -8,9 +8,13 @@ const colorOptions = document.getElementById("color-options");
 const colorPicker = document.getElementById("customColor");
 const colorPanel = document.getElementById("colorPanel");
 
+const toolButtons = document.querySelectorAll(".tool-btn");
+const toolPanel = document.getElementById("toolPanel");
+
 const colors = ["#f44336", "#4caf50", "#2196f3", "#ffeb3b", "#9c27b0", "#000000", "#ffffff"];
 let currentTool = "pencil";
 let currentColor = "#000000";
+let selectedColor = "#000000";
 let isDrawing = false;
 
 canvas.width = canvas.height = baseCanvas.width = baseCanvas.height = 500;
@@ -42,11 +46,15 @@ img.onload = () => {
   baseCtx.drawImage(img, 0, 0, baseCanvas.width, baseCanvas.height);
 };
 
-document.querySelectorAll(".tool-btn").forEach(btn => {
+toolButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    currentTool = btn.getAttribute("data-tool");
+    toolButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    currentTool = btn.dataset.tool;
     updateBrushSize();
     showColorOptions();
+    showToolOptions(currentTool);
   });
 });
 
@@ -72,6 +80,7 @@ function showColorOptions() {
     div.style.backgroundColor = color;
     div.addEventListener("click", () => {
       currentColor = color;
+      selectedColor = color;
       colorPicker.value = color;
     });
     colorOptions.appendChild(div);
@@ -80,6 +89,7 @@ function showColorOptions() {
 
 colorPicker.addEventListener("change", () => {
   currentColor = colorPicker.value;
+  selectedColor = colorPicker.value;
 });
 
 canvas.addEventListener("mousedown", startDraw);
@@ -161,7 +171,7 @@ function fillArea(x, y) {
     const wall = getColorAtPixel(base, cx, cy, width);
 
     if (!colorsMatch(curr, targetColor)) continue;
-    if (colorsMatch(wall, [0, 0, 0])) continue; // bloqueia em preto
+    if (colorsMatch(wall, [0, 0, 0])) continue;
 
     setColorAtPixel(data, cx, cy, width, fillColor);
 
@@ -213,3 +223,33 @@ document.getElementById("save-btn").addEventListener("click", () => {
   localStorage.setItem("paintedImage", dataURL);
   window.location.href = "save.html";
 });
+
+function showToolOptions(tool) {
+  toolPanel.innerHTML = "";
+  toolPanel.classList.add("active");
+
+  const palette = ["red", "green", "blue", "yellow", "magenta", "cyan", "brown", "black", "orange", "purple"];
+
+  palette.forEach(color => {
+    const img = document.createElement("img");
+    img.src = `src/images/${tool}_${color}.png`;
+    img.alt = `${tool} ${color}`;
+    img.dataset.color = color;
+    img.addEventListener("click", () => {
+      currentColor = selectedColor = color;
+    });
+    toolPanel.appendChild(img);
+  });
+
+  if (tool === "pencil") {
+    const colorInput = document.createElement("input");
+    colorInput.type = "color";
+    colorInput.className = "color-picker";
+    colorInput.addEventListener("input", () => {
+      currentColor = selectedColor = colorInput.value;
+    });
+    toolPanel.appendChild(colorInput);
+  }
+}
+
+document.querySelector('.tool-btn[data-tool="pencil"]').click();

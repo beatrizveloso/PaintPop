@@ -83,8 +83,35 @@
     const downloadLink = document.getElementById('download-btn');
 
     if (imageData) {
-      imgElement.src = imageData;
-      downloadLink.href = imageData;
+      const finalCanvas = document.createElement('canvas');
+      const finalCtx = finalCanvas.getContext('2d');
+
+      const img = new Image();
+      img.src = imageData;
+      img.onload = function() {
+        finalCanvas.width = img.width;
+        finalCanvas.height = img.height;
+
+        finalCtx.drawImage(img, 0, 0);
+
+        const linesData = localStorage.getItem('paintedLines');
+        if (linesData) {
+          const lines = JSON.parse(linesData);
+          lines.forEach(line => {
+            finalCtx.beginPath();
+            finalCtx.moveTo(line.startX, line.startY);
+            finalCtx.lineTo(line.endX, line.endY);
+            finalCtx.strokeStyle = line.color;
+            finalCtx.lineWidth = line.lineWidth;
+            finalCtx.stroke();
+          });
+        }
+
+        const finalImage = finalCanvas.toDataURL();
+        imgElement.src = finalImage;
+        downloadLink.href = finalImage;
+      };
+
     } else {
       imgElement.alt = "Nenhuma pintura encontrada.";
     }
