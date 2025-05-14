@@ -228,11 +228,20 @@ function showToolOptions(tool) {
   toolPanel.innerHTML = "";
   toolPanel.classList.add("active");
 
-  const palette = ["red", "green", "blue", "yellow", "magenta", "cyan", "brown", "black", "orange", "purple"];
-
+  const palette = [ "#CC001A", "#FF0114", "#FD5F00", "#F77C9C", "#FFA2B9", 
+  "#F97316", "#FF7F50", "#FFA07A", "#FFBCB3", "#FFD1BA", 
+  "#FCD34D", "#FDE68A", "#FFF1B6", "#FFF8D6", "#D4AF37", 
+  "#A3E635", "#22AE55", "#88E291", "#4B9217", "#506219", 
+  "#22D3EE", "#99F6E4", "#CFFAFE", "#0F766E", "#2DD4BF", 
+  "#3B82F6", "#93C5FD", "#C7D2FE", "#A5B4FC", "#1E3A8A", 
+  "#8B5CF6", "#C4B5FD", "#E9D5FF", "#D8B4FE", "#7C3AED", 
+  "#B5651D", "#D97706", "#6F4E37", "#937B5F", "#D0AD89", 
+  "#D1D5DB", "#9CA3AF", "#6B7280", "#F3F4F6", "#1F2937", 
+  "#FFFFFF", "#FFDAE9", "#E0BBE4", "#A2D2FF", "#7EEFAA"];
+  
   palette.forEach(color => {
     const img = document.createElement("img");
-    img.src = `src/images/${tool}_${color}.png`;
+    img.src = `src/images/${tool}_${color.replace("#", "")}.png`;
     img.alt = `${tool} ${color}`;
     img.dataset.color = color;
     img.addEventListener("click", () => {
