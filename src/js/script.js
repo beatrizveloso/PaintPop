@@ -63,12 +63,22 @@ redoBtn.addEventListener("click", () => {
     }
 });
 
+const customConfirm = document.getElementById("customConfirm");
+const confirmYes = document.getElementById("confirmYes");
+const confirmNo = document.getElementById("confirmNo");
+
 clearBtn.addEventListener("click", () => {
-    const confirmed = confirm("Tem certeza que deseja limpar a tela? Esta ação não pode ser desfeita.");
-    if (confirmed) {
-        saveState();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
+    customConfirm.style.display = "flex";
+});
+
+confirmYes.addEventListener("click", () => {
+    saveState();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    customConfirm.style.display = "none";
+});
+
+confirmNo.addEventListener("click", () => {
+    customConfirm.style.display = "none";
 });
 
 function getImageFromURL() {
@@ -394,27 +404,16 @@ function showToolOptions(tool) {
 }
 
 saveBtn.addEventListener("click", () => {
-  // Criar canvas temporário
   const combinedCanvas = document.createElement("canvas");
   combinedCanvas.width = canvas.width;
   combinedCanvas.height = canvas.height;
   const combinedCtx = combinedCanvas.getContext("2d");
-  
-  // 1. Fundo branco
   combinedCtx.fillStyle = "#ffffff";
   combinedCtx.fillRect(0, 0, combinedCanvas.width, combinedCanvas.height);
-  
-  // 2. Primeiro: desenhar a PINTURA do usuário (como base)
   combinedCtx.drawImage(canvas, 0, 0);
-  
-  // 3. Depois: desenhar as LINHAS do desenho original por cima
   combinedCtx.drawImage(baseCanvas, 0, 0);
-  
-  // Salvar no localStorage e redirecionar
   const imageData = canvas.toDataURL("image/png");
   localStorage.setItem("paintedImage", imageData);
-  
-  // Passar o nome da imagem original como parâmetro
   const imgName = new URLSearchParams(window.location.search).get("img") || "bobbie.png";
   window.location.href = `save.html?img=${imgName}`;
 });
