@@ -394,18 +394,31 @@ function showToolOptions(tool) {
 }
 
 saveBtn.addEventListener("click", () => {
-    const finalCanvas = document.createElement("canvas");
-    finalCanvas.width = canvas.width;
-    finalCanvas.height = canvas.height;
-    const finalCtx = finalCanvas.getContext("2d");
-
-    finalCtx.drawImage(baseCanvas, 0, 0);
-    finalCtx.drawImage(canvas, 0, 0);
-
-    const dataURL = finalCanvas.toDataURL();
-    localStorage.setItem("paintedImage", dataURL);
-    window.location.href = "save.html";
+  // Criar canvas temporário
+  const combinedCanvas = document.createElement("canvas");
+  combinedCanvas.width = canvas.width;
+  combinedCanvas.height = canvas.height;
+  const combinedCtx = combinedCanvas.getContext("2d");
+  
+  // 1. Fundo branco
+  combinedCtx.fillStyle = "#ffffff";
+  combinedCtx.fillRect(0, 0, combinedCanvas.width, combinedCanvas.height);
+  
+  // 2. Primeiro: desenhar a PINTURA do usuário (como base)
+  combinedCtx.drawImage(canvas, 0, 0);
+  
+  // 3. Depois: desenhar as LINHAS do desenho original por cima
+  combinedCtx.drawImage(baseCanvas, 0, 0);
+  
+  // Salvar no localStorage e redirecionar
+  const imageData = canvas.toDataURL("image/png");
+  localStorage.setItem("paintedImage", imageData);
+  
+  // Passar o nome da imagem original como parâmetro
+  const imgName = new URLSearchParams(window.location.search).get("img") || "bobbie.png";
+  window.location.href = `save.html?img=${imgName}`;
 });
+
 
 document.querySelector('.tool-btn[data-tool="pencil"]').click();
 updateUndoRedoButtons();

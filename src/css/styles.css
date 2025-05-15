@@ -54,8 +54,6 @@ body {
     filter: grayscale(0%);
 }
 
-
-
 .tools-btn {
     background: none;
     border: none;
@@ -101,18 +99,12 @@ body {
     height: 68px;
 }
 
-
-
-
-
-
-
 .main-area {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 290px;
+    margin-left: 200px;
 }
 
 .tool-panel {
@@ -236,8 +228,12 @@ body {
     margin-top: 5px;
 }
 
+.action-button.saved {
+    background-color: #4CAF50;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
 
-/* Ajustes para tamanho menor */
 @media (max-width: 480px) {
     .layout {
         flex-direction: column;
