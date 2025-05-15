@@ -234,6 +234,73 @@ body {
     transition: all 0.3s ease;
 }
 
+.confirm-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  font-family: 'Baloo 2', sans-serif;
+  border: 4px solid #f06292;
+}
+
+.confirm-content h3 {
+  margin-top: 0;
+  color: #f06292;
+  font-size: 24px;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.confirm-buttons button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#confirmYes {
+  background-color: #f06292;
+  color: white;
+}
+
+#confirmYes:hover {
+  background-color: #d81b60;
+  transform: scale(1.05);
+}
+
+#confirmNo {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#confirmNo:hover {
+  background-color: #bdbdbd;
+  transform: scale(1.05);
+}
+
 @media (max-width: 480px) {
     .layout {
         flex-direction: column;
