@@ -205,10 +205,10 @@ body {
     height: 100vh;
     background-color: #F98CB1;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 20px 10px;
+    gap: 25px;
     z-index: 10;
 }
 
