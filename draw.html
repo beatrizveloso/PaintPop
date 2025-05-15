@@ -34,9 +34,25 @@
           <canvas id="paintCanvas" width="500" height="500"></canvas>
         </div>
 
-        <div class="buttons">
+        <aside class="right-tab">
+          <button id="clear-btn" class="tools-btn">
+            <img src="src/images/trash.png" alt="Limpar" />
+          </button>
+          <div class="brush-size">
+            <input type="range" id="brushRange" min="1" max="50" value="5">
+            <div id="brushIndicator"></div>
+          </div>
+          <button id="eyedropper-btn" class="tools-btn">
+            <img src="src/images/conta-gotas.png" alt="Contagotas" />
+          </button>
+          <button id="eraser-btn" class="tools-btn">
+            <img src="src/images/borracha.png" alt="Borracha" />
+          </button>
           <button id="undo-btn" class="action-button">
             <img src="src/images/undo.png" alt="Desfazer" />
+          </button>
+          <button id="redo-btn" class="tools-btn">
+            <img src="src/images/go.png" alt="Refazer" />
           </button>
           <button id="save-btn" class="action-button">
             <img src="src/images/check.png" alt="Pronto" />
@@ -44,7 +60,7 @@
           <a href="index.html" class="action-button">
             <img src="src/images/home.png" alt="Home" />
           </a>
-        </div>
+      </aside>
       </div>
     </main>
   </div>

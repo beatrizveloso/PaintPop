@@ -14,32 +14,8 @@ body {
 }
 
 .sidebar {
-    background: #f06292; 
-    width: 120px;
-    padding: 20px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-radius: 0 50px 50px 0;
-    justify-content: center;
-}
-
-.tool-btn {
-    background: white;
-    border: none;
-    border-radius: 50px;
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-}
-
-.sidebar {
     background: #f06292;
-    width: 140px; 
+    width: 140px;
     padding: 20px 10px;
     display: flex;
     flex-direction: column;
@@ -49,38 +25,9 @@ body {
     align-items: center;
     position: fixed;
     height: 100vh;
+    z-index: 10;
 }
 
-.color-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    max-height: 300px;
-    margin-left: 20px;
-    padding-right: 0;
-    scrollbar-width: none; 
-  }
-  
-  .color-options::-webkit-scrollbar {
-    display: none;
-  }
-
-.main-area {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 290px; 
-}
-
-#undo-btn {
-    width: 110px;
-    height: 100px;
-    cursor: pointer;
-    margin-top: 100px;
-    margin-left: 50px; 
-}
 
 .tool-btn {
     background: white;
@@ -107,6 +54,67 @@ body {
     filter: grayscale(0%);
 }
 
+
+
+.tools-btn {
+    background: none;
+    border: none;
+    width: 68px;
+    height: 68px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.3s ease;
+}
+
+.tools-btn img {
+    width: 68px;
+    height: 68px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    width: 68px;
+    height: 68px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.3s ease;
+}
+
+.action-button img {
+    width: 68px;
+    height: 68px;
+}
+
+#undo-btn img,
+#save-btn img {
+    width: 68px;
+    height: 68px;
+}
+
+#eraser-btn img {
+    width: 90px;
+    height: 68px;
+}
+
+
+
+
+
+
+
+.main-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 290px;
+}
+
 .tool-panel {
     position: fixed;
     left: 120px;
@@ -119,16 +127,18 @@ body {
     align-items: center;
     background: #f8bbd0;
     border-radius: 0 50px 50px 0;
-    overflow-y: auto;
     margin-left: 30px;
+    overflow-y: auto;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.tool-panel::-webkit-scrollbar {
+    display: none; 
 }
 
 .tool-panel.active {
     display: flex;
-}
-
-.tool-panel::-webkit-scrollbar {
-    display: none;
 }
 
 .tool-panel img {
@@ -142,12 +152,27 @@ body {
     transform: scale(1.1);
 }
 
+.color-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: 300px;
+    padding-right: 10px;
+    margin-left: 20px;
+    scrollbar-width: none;
+}
+
+.color-options::-webkit-scrollbar {
+    display: none;
+}
+
 .color-picker {
-    width: 80px;
+    width: 40px;
     height: 40px;
-    border: none;
-    border-radius: 10px;
-    margin-top: 10px;
+    border-radius: 5px;
+    border: 2px solid #444;
+    margin-left: 20px;
     cursor: pointer;
 }
 
@@ -177,116 +202,71 @@ body {
 
 #baseCanvas {
     z-index: 2;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
-.color-options {
+.right-tab {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 125px;
+    height: 100vh;
+    background-color: #F98CB1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    max-height: 300px;
-    padding-right: 10px;
-    margin-left: 20px;
-}
-
-.color-picker {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    border: 2px solid #444;
-    margin-left: 20px;
-    cursor: pointer;
-}
-
-.action-button {
-    background: none;
-    border: none;
-    width: 110px;
-    height: 100px;
-    cursor: pointer;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: 50px;
+    gap: 20px;
+    padding: 20px 10px;
+    z-index: 10;
 }
 
-.action-button img {
-    width: 100%;
-    height: 100%;
-}
-
-.buttons {
+.brush-size {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    align-items: center;
 }
 
-.color-panel {
-    width: 180px;
-    height: 30px;
+#brushRange {
+    width: 80px;
 }
 
-.color-panel {
-    display: none;
-  }
-  
+#brushIndicator {
+    background: #000;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
+
+/* Ajustes para tamanho menor */
 @media (max-width: 480px) {
     .layout {
-        flex-direction: column; 
-        height: 100vh; 
+        flex-direction: column;
+        height: 100vh;
     }
 
     .sidebar {
-        background: #f06292;
         width: 120px;
-        padding: 20px 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
         border-radius: 0 50px 50px 0;
-        justify-content: center;
-        position: fixed;
-        height: 100vh;
         z-index: 10;
     }
 
-    .tool-btn {
-        width: 80px; 
-        height: 80px;
-    }
-
-    .tool-btn img {
-        width: 60px;
-        height: 60px;
-    }
-
     .canvas-container {
-        position: relative;
         width: 100%;
-        height: 70vh; 
-        background: white;
-        border: 4px solid #000;
-        margin-left: 140px; 
-        margin-top: 30px; 
-    }
-
-    .canvas-container canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
+        height: 70vh;
+        margin-left: 140px;
+        margin-top: 30px;
     }
 
     .tool-panel {
-        display: none; 
+        display: none;
     }
 
     .buttons {
-        display: flex;
+        flex-direction: row;
         justify-content: space-between;
         gap: 20px;
         position: fixed;
-        bottom: 10px; 
+        bottom: 10px;
         width: 100%;
         padding: 10px;
         background-color: #ffe0f1;
