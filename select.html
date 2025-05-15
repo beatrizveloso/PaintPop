@@ -33,12 +33,62 @@
       font-size: 2.5rem;
       color: #b1085c;
       margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .folders-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .folder {
+      width: 200px;
+      height: 250px;
+      background-color: rgba(219, 202, 202, 0.8);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(1px);
+      border: 2px solid #f9f871;
+      position: relative;
+    }
+
+    .folder:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .folder-icon img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .add-icon {
+      font-size: 100px;
+    }
+
+    .folder-name {
+      font-size: 1.5rem;
+      color: #b1085c;
+      font-weight: bold;
     }
 
     .carousel-container {
       width: 80%;
       overflow: hidden;
       position: relative;
+      margin-top: 50px;
+      display: none;
     }
 
     .carousel {
@@ -53,6 +103,7 @@
       border-radius: 10px;
       margin-right: 20px;
       transition: transform 0.2s, box-shadow 0.3s;
+      object-fit: cover;
     }
 
     .carousel img:hover {
@@ -75,12 +126,15 @@
       border-radius: 50%;
       cursor: pointer;
       z-index: 10;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
+      opacity: 0.8;
+      display: none;
     }
 
     .arrow:hover {
       background-color: #f0e141;
       transform: translateY(-50%) scale(1.1);
+      opacity: 1;
     }
 
     .arrow:focus {
@@ -94,67 +148,395 @@
     #nextBtn {
       right: 20px;
     }
+
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #ff66b2;
+      color: white;
+      font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      display: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .back-btn:hover {
+      background-color: #ff4da1;
+      transform: scale(1.1);
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .upload-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .upload-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    .upload-btn {
+      background-color: #b1085c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .upload-btn:hover {
+      background-color: #8a0647;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Escolha um desenho</h1>
+  <h1 id="main-title">Escolha uma pasta</h1>
 
-  <div class="carousel-container">
-    <div class="carousel" id="carousel">
-      <a href="draw.html?img=bobbie-1.png"><img src="src/images/cavalete-1.png" alt="Cavalete 1"></a>
-      <a href="draw.html?img=bobbie-2.png"><img src="src/images/cavalete-2.png" alt="Cavalete 2"></a>
-      <a href="draw.html?img=bobbie-3.png"><img src="src/images/cavalete-3.png" alt="Cavalete 3"></a>
-      <a href="draw.html?img=bobbie-4.png"><img src="src/images/cavalete-4.png" alt="Cavalete 4"></a>
-      <a href="draw.html?img=bobbie-5.png"><img src="src/images/cavalete-5.png" alt="Cavalete 5"></a>
-      <a href="draw.html?img=bobbie-6.png"><img src="src/images/cavalete-6.png" alt="Cavalete 6"></a>
-      <a href="draw.html?img=bobbie-7.png"><img src="src/images/cavalete-7.png" alt="Cavalete 7"></a>
-      <a href="draw.html?img=bobbie-8.png"><img src="src/images/cavalete-8.png" alt="Cavalete 8"></a>
-      <a href="draw.html?img=bobbie-9.png"><img src="src/images/cavalete-9.png" alt="Cavalete 9"></a>
-      <a href="draw.html?img=bobbie-10.png"><img src="src/images/cavalete-10.png" alt="Cavalete 10"></a>
-      <a href="draw.html?img=bobbie-11.png"><img src="src/images/cavalete-11.png" alt="Cavalete 11"></a>
-      <a href="draw.html?img=bobbie-12.png"><img src="src/images/cavalete-12.png" alt="Cavalete 12"></a>
-      <a href="draw.html?img=bobbie-13.png"><img src="src/images/cavalete-13.png" alt="Cavalete 13"></a>
-      <a href="draw.html?img=bobbie-14.png"><img src="src/images/cavalete-14.png" alt="Cavalete 14"></a>
-      <a href="draw.html?img=bobbie-15.png"><img src="src/images/cavalete-15.png" alt="Cavalete 15"></a>
-      <a href="draw.html?img=bobbie-16.png"><img src="src/images/cavalete-16.png" alt="Cavalete 16"></a>
-      <a href="draw.html?img=bobbie-17.png"><img src="src/images/cavalete-17.png" alt="Cavalete 17"></a>
-      <a href="draw.html?img=bobbie-18.png"><img src="src/images/cavalete-18.png" alt="Cavalete 18"></a>
-      <a href="draw.html?img=bobbie-19.png"><img src="src/images/cavalete-19.png" alt="Cavalete 19"></a>
-      <a href="draw.html?img=bobbie-20.png"><img src="src/images/cavalete-20.png" alt="Cavalete 20"></a>
+  <div class="folders-container" id="foldersContainer">
+    <div class="folder" data-folder="bobbie">
+      <div class="folder-icon"><img src="src/images/folder.png" alt="Pasta"></div>
+      <div class="folder-name">Bobbie Goods</div>
+    </div>
+    <div class="folder" data-folder="animais">
+      <div class="folder-icon"><img src="src/images/folder.png" alt="Pasta"></div>
+      <div class="folder-name">Animais</div>
+    </div>
+    <div class="folder" data-folder="barbie">
+      <div class="folder-icon"><img src="src/images/folder.png" alt="Pasta"></div>
+      <div class="folder-name">Barbie</div>
+    </div>
+    <div class="folder" data-folder="animes">
+      <div class="folder-icon"><img src="src/images/folder.png" alt="Pasta"></div>
+      <div class="folder-name">Animes</div>
+    </div>
+    <div class="folder" data-folder="variados">
+      <div class="folder-icon"><img src="src/images/folder.png" alt="Pasta"></div>
+      <div class="folder-name">Variados</div>
+    </div>
+    <div class="folder" id="uploadFolder">
+      <div class="add-icon">➕</div>
+      <div class="folder-name">Meu Desenho</div>
     </div>
   </div>
 
+  <div class="carousel-container" id="bobbieCarousel">
+    <div class="carousel">
+      <a href="draw.html?img=bobbie-1.png"><img src="src/images/cavalete-1.png" alt="Bobbie 1"></a>
+      <a href="draw.html?img=bobbie-2.png"><img src="src/images/cavalete-2.png" alt="Bobbie 2"></a>
+      <a href="draw.html?img=bobbie-3.png"><img src="src/images/cavalete-3.png" alt="Bobbie 3"></a>
+      <a href="draw.html?img=bobbie-4.png"><img src="src/images/cavalete-4.png" alt="Bobbie 4"></a>
+      <a href="draw.html?img=bobbie-5.png"><img src="src/images/cavalete-5.png" alt="Bobbie 5"></a>
+      <a href="draw.html?img=bobbie-6.png"><img src="src/images/cavalete-6.png" alt="Bobbie 6"></a>
+      <a href="draw.html?img=bobbie-7.png"><img src="src/images/cavalete-7.png" alt="Bobbie 7"></a>
+      <a href="draw.html?img=bobbie-8.png"><img src="src/images/cavalete-8.png" alt="Bobbie 8"></a>
+      <a href="draw.html?img=bobbie-9.png"><img src="src/images/cavalete-9.png" alt="Bobbie 9"></a>
+      <a href="draw.html?img=bobbie-10.png"><img src="src/images/cavalete-10.png" alt="Bobbie 10"></a>
+      <a href="draw.html?img=bobbie-11.png"><img src="src/images/cavalete-11.png" alt="Bobbie 11"></a>
+      <a href="draw.html?img=bobbie-12.png"><img src="src/images/cavalete-12.png" alt="Bobbie 12"></a>
+      <a href="draw.html?img=bobbie-13.png"><img src="src/images/cavalete-13.png" alt="Bobbie 13"></a>
+      <a href="draw.html?img=bobbie-14.png"><img src="src/images/cavalete-14.png" alt="Bobbie 14"></a>
+      <a href="draw.html?img=bobbie-15.png"><img src="src/images/cavalete-15.png" alt="Bobbie 15"></a>
+      <a href="draw.html?img=bobbie-16.png"><img src="src/images/cavalete-16.png" alt="Bobbie 16"></a>
+      <a href="draw.html?img=bobbie-17.png"><img src="src/images/cavalete-17.png" alt="Bobbie 17"></a>
+      <a href="draw.html?img=bobbie-18.png"><img src="src/images/cavalete-18.png" alt="Bobbie 18"></a>
+      <a href="draw.html?img=bobbie-19.png"><img src="src/images/cavalete-19.png" alt="Bobbie 19"></a>
+      <a href="draw.html?img=bobbie-20.png"><img src="src/images/cavalete-20.png" alt="Bobbie 20"></a>
+    </div>
   </div>
+
+ <div class="carousel-container" id="animaisCarousel">
+  <div class="carousel">
+    <a href="draw.html?img=animal-1.png"><img src="src/images/cavalete-21.png" alt="Animal 1" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-2.png"><img src="src/images/cavalete-22.png" alt="Animal 2" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-3.png"><img src="src/images/cavalete-23.png" alt="Animal 3" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-4.png"><img src="src/images/cavalete-24.png" alt="Animal 4" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-5.png"><img src="src/images/cavalete-25.png" alt="Animal 5" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-6.png"><img src="src/images/cavalete-26.png" alt="Animal 6" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-7.png"><img src="src/images/cavalete-27.png" alt="Animal 7" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-8.png"><img src="src/images/cavalete-28.png" alt="Animal 8" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-9.png"><img src="src/images/cavalete-29.png" alt="Animal 9" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-10.png"><img src="src/images/cavalete-30.png" alt="Animal 10" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-11.png"><img src="src/images/cavalete-31.png" alt="Animal 11" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-12.png"><img src="src/images/cavalete-32.png" alt="Animal 12" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-13.png"><img src="src/images/cavalete-33.png" alt="Animal 13" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-14.png"><img src="src/images/cavalete-34.png" alt="Animal 14" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-15.png"><img src="src/images/cavalete-35.png" alt="Animal 15" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-16.png"><img src="src/images/cavalete-36.png" alt="Animal 16" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-17.png"><img src="src/images/cavalete-37.png" alt="Animal 17" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-18.png"><img src="src/images/cavalete-38.png" alt="Animal 18" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-19.png"><img src="src/images/cavalete-39.png" alt="Animal 19" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=animal-20.png"><img src="src/images/cavalete-40.png" alt="Animal 20" onerror="handleImageError(this)"></a>
   </div>
+</div>
+
+<div class="carousel-container" id="barbieCarousel">
+  <div class="carousel">
+    <a href="draw.html?img=barbie-1.png"><img src="src/images/cavalete-41.png" alt="Barbie 1" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-2.png"><img src="src/images/cavalete-42.png" alt="Barbie 2" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-3.png"><img src="src/images/cavalete-43.png" alt="Barbie 3" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-4.png"><img src="src/images/cavalete-44.png" alt="Barbie 4" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-5.png"><img src="src/images/cavalete-45.png" alt="Barbie 5" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-6.png"><img src="src/images/cavalete-46.png" alt="Barbie 6" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-7.png"><img src="src/images/cavalete-47.png" alt="Barbie 7" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-8.png"><img src="src/images/cavalete-48.png" alt="Barbie 8" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-9.png"><img src="src/images/cavalete-49.png" alt="Barbie 9" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-10.png"><img src="src/images/cavalete-50.png" alt="Barbie 10" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-11.png"><img src="src/images/cavalete-51.png" alt="Barbie 11" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-12.png"><img src="src/images/cavalete-52.png" alt="Barbie 12" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-13.png"><img src="src/images/cavalete-53.png" alt="Barbie 13" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-14.png"><img src="src/images/cavalete-54.png" alt="Barbie 14" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-15.png"><img src="src/images/cavalete-55.png" alt="Barbie 15" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-16.png"><img src="src/images/cavalete-56.png" alt="Barbie 16" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-17.png"><img src="src/images/cavalete-57.png" alt="Barbie 17" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-18.png"><img src="src/images/cavalete-58.png" alt="Barbie 18" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-19.png"><img src="src/images/cavalete-59.png" alt="Barbie 19" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=barbie-20.png"><img src="src/images/cavalete-60.png" alt="Barbie 20" onerror="handleImageError(this)"></a>
+  </div>
+</div>
+
+<div class="carousel-container" id="animesCarousel">
+  <div class="carousel">
+    <a href="draw.html?img=anime-1.png"><img src="src/images/cavalete-61.png" alt="Anime 1" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-2.png"><img src="src/images/cavalete-62.png" alt="Anime 2" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-3.png"><img src="src/images/cavalete-63.png" alt="Anime 3" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-4.png"><img src="src/images/cavalete-64.png" alt="Anime 4" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-5.png"><img src="src/images/cavalete-65.png" alt="Anime 5" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-6.png"><img src="src/images/cavalete-66.png" alt="Anime 6" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-7.png"><img src="src/images/cavalete-67.png" alt="Anime 7" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-8.png"><img src="src/images/cavalete-68.png" alt="Anime 8" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-9.png"><img src="src/images/cavalete-69.png" alt="Anime 9" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-10.png"><img src="src/images/cavalete-70.png" alt="Anime 10" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-11.png"><img src="src/images/cavalete-71.png" alt="Anime 11" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-12.png"><img src="src/images/cavalete-72.png" alt="Anime 12" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-13.png"><img src="src/images/cavalete-73.png" alt="Anime 13" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-14.png"><img src="src/images/cavalete-74.png" alt="Anime 14" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-15.png"><img src="src/images/cavalete-75.png" alt="Anime 15" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-16.png"><img src="src/images/cavalete-76.png" alt="Anime 16" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-17.png"><img src="src/images/cavalete-77.png" alt="Anime 17" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-18.png"><img src="src/images/cavalete-78.png" alt="Anime 18" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-19.png"><img src="src/images/cavalete-79.png" alt="Anime 19" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=anime-20.png"><img src="src/images/cavalete-80.png" alt="Anime 20" onerror="handleImageError(this)"></a>
+  </div>
+</div>
+
+<div class="carousel-container" id="variadosCarousel">
+  <div class="carousel">
+    <a href="draw.html?img=variado-1.png"><img src="src/images/cavalete-81.png" alt="Variado 1" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-2.png"><img src="src/images/cavalete-82.png" alt="Variado 2" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-3.png"><img src="src/images/cavalete-83.png" alt="Variado 3" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-4.png"><img src="src/images/cavalete-84.png" alt="Variado 4" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-5.png"><img src="src/images/cavalete-85.png" alt="Variado 5" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-6.png"><img src="src/images/cavalete-86.png" alt="Variado 6" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-7.png"><img src="src/images/cavalete-87.png" alt="Variado 7" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-8.png"><img src="src/images/cavalete-88.png" alt="Variado 8" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-9.png"><img src="src/images/cavalete-89.png" alt="Variado 9" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-10.png"><img src="src/images/cavalete-90.png" alt="Variado 10" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-11.png"><img src="src/images/cavalete-91.png" alt="Variado 11" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-12.png"><img src="src/images/cavalete-92.png" alt="Variado 12" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-13.png"><img src="src/images/cavalete-93.png" alt="Variado 13" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-14.png"><img src="src/images/cavalete-94.png" alt="Variado 14" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-15.png"><img src="src/images/cavalete-95.png" alt="Variado 15" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-16.png"><img src="src/images/cavalete-96.png" alt="Variado 16" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-17.png"><img src="src/images/cavalete-97.png" alt="Variado 17" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-18.png"><img src="src/images/cavalete-98.png" alt="Variado 18" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-19.png"><img src="src/images/cavalete-99.png" alt="Variado 19" onerror="handleImageError(this)"></a>
+    <a href="draw.html?img=variado-20.png"><img src="src/images/cavalete-100.png" alt="Variado 20" onerror="handleImageError(this)"></a>
+  </div>
+</div>
 
   <button class="arrow" id="prevBtn">&#8592;</button>
   <button class="arrow" id="nextBtn">&#8594;</button>
+  <button class="back-btn" id="backBtn">←</button>
+
+  <input type="file" id="fileInput" accept="image/*">
+
+  <div class="upload-modal" id="uploadModal">
+    <div class="upload-content">
+      <h2>Envie seu desenho</h2>
+      <p>Escolha uma imagem do seu computador para pintar</p>
+      <button class="upload-btn" id="selectFileBtn">Selecionar Arquivo</button>
+      <div class="error-message" id="uploadErrorMessage"></div>
+    </div>
+  </div>
 
   <script>
-    const carousel = document.getElementById('carousel');
+    const foldersContainer = document.getElementById('foldersContainer');
+    const folders = document.querySelectorAll('.folder');
+    const carousels = document.querySelectorAll('.carousel-container');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    let index = 0;
+    const backBtn = document.getElementById('backBtn');
+    const mainTitle = document.getElementById('main-title');
+    const uploadFolder = document.getElementById('uploadFolder');
+    const fileInput = document.getElementById('fileInput');
+    const uploadModal = document.getElementById('uploadModal');
+    const selectFileBtn = document.getElementById('selectFileBtn');
+    const uploadErrorMessage = document.getElementById('uploadErrorMessage');
 
-    function moveCarousel() {
+    const carouselIndices = {
+      bobbie: 0,
+      animais: 0,
+      barbie: 0,
+      animes: 0,
+      variados: 0
+    };
+
+    let activeCarousel = null;
+
+    function moveCarousel(carousel, index) {
       const itemWidth = carousel.querySelector('img').offsetWidth + 20;
-      carousel.style.transform = `translateX(-${index * itemWidth}px)`;
+      carousel.querySelector('.carousel').style.transform = `translateX(-${index * itemWidth}px)`;
     }
 
+    function showCarousel(folderName) {
+      carousels.forEach(carousel => {
+        carousel.style.display = 'none';
+      });
+
+      foldersContainer.style.display = 'none';
+
+      prevBtn.style.display = 'block';
+      nextBtn.style.display = 'block';
+      backBtn.style.display = 'block';
+      mainTitle.textContent = `Desenhos de ${folderName}`;
+
+      const carouselId = `${folderName}Carousel`;
+      const carousel = document.getElementById(carouselId);
+      if (carousel) {
+        carousel.style.display = 'block';
+        activeCarousel = carousel;
+
+        carouselIndices[folderName] = 0;
+        moveCarousel(carousel, 0);
+      }
+    }
+
+    function backToFolders() {
+      carousels.forEach(carousel => {
+        carousel.style.display = 'none';
+      });
+
+      foldersContainer.style.display = 'flex';
+
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      backBtn.style.display = 'none';
+
+      mainTitle.textContent = 'Escolha uma pasta';
+
+      activeCarousel = null;
+    }
+
+    folders.forEach(folder => {
+      if (folder.id !== 'uploadFolder') {
+        folder.addEventListener('click', () => {
+          const folderName = folder.getAttribute('data-folder');
+          showCarousel(folderName);
+        });
+      }
+    });
+
     nextBtn.addEventListener('click', () => {
-      const totalItems = carousel.children.length;
-      if (index < totalItems - 1) {
-        index++;
-        moveCarousel();
+      if (activeCarousel) {
+        const folderName = activeCarousel.id.replace('Carousel', '');
+        const carousel = activeCarousel.querySelector('.carousel');
+        const totalItems = carousel.children.length;
+        const visibleItems = Math.floor(activeCarousel.offsetWidth / (250 + 20));
+
+        if (carouselIndices[folderName] < totalItems - visibleItems) {
+          carouselIndices[folderName]++;
+          moveCarousel(activeCarousel, carouselIndices[folderName]);
+        }
       }
     });
 
     prevBtn.addEventListener('click', () => {
-      if (index > 0) {
-        index--;
-        moveCarousel();
+      if (activeCarousel) {
+        const folderName = activeCarousel.id.replace('Carousel', '');
+        if (carouselIndices[folderName] > 0) {
+          carouselIndices[folderName]--;
+          moveCarousel(activeCarousel, carouselIndices[folderName]);
+        }
       }
+    });
+
+    backBtn.addEventListener('click', backToFolders);
+    function handleImageError(img) {
+      img.src = 'src/images/default-image.png';
+      img.alt = 'Imagem não disponível';
+    }
+    uploadFolder.addEventListener('click', () => {
+      uploadModal.style.display = 'flex';
+    });
+
+    selectFileBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        const file = e.target.files[0];
+        if (file.type.match('image.*')) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            window.location.href = `draw.html?customImg=${encodeURIComponent(event.target.result)}`;
+          };
+          reader.readAsDataURL(file);
+        } else {
+          uploadErrorMessage.textContent = 'Por favor, selecione um arquivo de imagem válido.';
+          uploadErrorMessage.style.display = 'block';
+        }
+      }
+    });
+
+    uploadModal.addEventListener('click', (e) => {
+      if (e.target === uploadModal) {
+        uploadModal.style.display = 'none';
+        uploadErrorMessage.style.display = 'none';
+      }
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      carousels.forEach(carousel => {
+        carousel.style.display = 'none';
+      });
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      backBtn.style.display = 'none';
     });
   </script>
 </body>
