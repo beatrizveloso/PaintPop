@@ -45,41 +45,6 @@ function getImageFromURL() {
 }
 
 function loadImage() {
-  const img = new Image();
-  img.crossOrigin = "anonymous";
-  
-  img.onload = () => {
-    baseCtx.clearRect(0, 0, baseCanvas.width, baseCanvas.height);
-    
-    const ratio = Math.min(baseCanvas.width / img.width, baseCanvas.height / img.height);
-    const newWidth = img.width * ratio;
-    const newHeight = img.height * ratio;
-    const xOffset = (baseCanvas.width - newWidth) / 2;
-    const yOffset = (baseCanvas.height - newHeight) / 2;
-    
-    baseCtx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
-    loadingOverlay.style.display = 'none';
-  };
-  
-  img.onerror = () => {
-    handleImageLoadError();
-    loadingOverlay.style.display = 'none';
-  };
-  
-  img.src = getImageFromURL();
-}
-
-function handleImageLoadError() {
-  const defaultImg = new Image();
-  defaultImg.src = "src/images/default-image.png";
-  defaultImg.onload = () => {
-    baseCtx.clearRect(0, 0, baseCanvas.width, baseCanvas.height);
-    baseCtx.drawImage(defaultImg, 0, 0, baseCanvas.width, baseCanvas.height);
-  };
-}
-
-function loadImage() {
-  // Configuração do loading overlay
   loadingOverlay.style.display = 'flex';
   loadingOverlay.style.justifyContent = 'center';
   loadingOverlay.style.alignItems = 'center';
@@ -102,7 +67,14 @@ function loadImage() {
   img.crossOrigin = "anonymous";
   img.onload = () => {
     baseCtx.clearRect(0, 0, baseCanvas.width, baseCanvas.height);
-    baseCtx.drawImage(img, 0, 0, baseCanvas.width, baseCanvas.height);
+    
+    const ratio = Math.min(baseCanvas.width / img.width, baseCanvas.height / img.height);
+    const newWidth = img.width * ratio;
+    const newHeight = img.height * ratio;
+    const xOffset = (baseCanvas.width - newWidth) / 2;
+    const yOffset = (baseCanvas.height - newHeight) / 2;
+    
+    baseCtx.drawImage(img, xOffset, yOffset, newWidth, newHeight);
     loadingOverlay.style.display = 'none';
     
     const params = new URLSearchParams(window.location.search);
@@ -110,11 +82,22 @@ function loadImage() {
       URL.revokeObjectURL(img.src);
     }
   };
+  
   img.onerror = () => {
     handleImageLoadError();
     loadingOverlay.style.display = 'none';
   };
+  
   img.src = getImageFromURL();
+}
+
+function handleImageLoadError() {
+  const defaultImg = new Image();
+  defaultImg.src = "src/images/default-image.png";
+  defaultImg.onload = () => {
+    baseCtx.clearRect(0, 0, baseCanvas.width, baseCanvas.height);
+    baseCtx.drawImage(defaultImg, 0, 0, baseCanvas.width, baseCanvas.height);
+  };
 }
 
 // Funções de desenho
@@ -149,6 +132,20 @@ function showColorOptions() {
             currentColor = color;
             selectedColor = color;
             colorPicker.value = color;
+            
+            // Se estava usando borracha, volta para a ferramenta anterior ou lápis
+            if (eraserBtn.classList.contains("active")) {
+                const previousTool = eraserBtn.dataset.previousTool || "pencil";
+                currentTool = previousTool;
+                toolButtons.forEach(b => b.classList.remove("active"));
+                document.querySelector(`.tool-btn[data-tool="${previousTool}"]`).classList.add("active");
+            } else {
+                // Senão, ativa o lápis
+                currentTool = "pencil";
+                toolButtons.forEach(b => b.classList.remove("active"));
+                document.querySelector('.tool-btn[data-tool="pencil"]').classList.add("active");
+            }
+            
             if (currentTool !== "eraser") ctx.strokeStyle = currentColor;
         });
         colorOptions.appendChild(div);
@@ -214,6 +211,12 @@ function showToolOptions(tool) {
             img.addEventListener("click", () => {
                 currentColor = selectedColor = color;
                 ctx.strokeStyle = currentColor;
+                
+                // Ativa automaticamente a ferramenta correspondente
+                currentTool = tool;
+                toolButtons.forEach(b => b.classList.remove("active"));
+                document.querySelector(`.tool-btn[data-tool="${tool}"]`).classList.add("active");
+                colorPanel.style.display = "flex";
             });
             toolPanel.appendChild(img);
         });
@@ -225,6 +228,12 @@ function showToolOptions(tool) {
         colorInput.addEventListener("input", () => {
             currentColor = selectedColor = colorInput.value;
             ctx.strokeStyle = currentColor;
+            
+            // Ativa automaticamente a ferramenta correspondente
+            currentTool = tool;
+            toolButtons.forEach(b => b.classList.remove("active"));
+            document.querySelector(`.tool-btn[data-tool="${tool}"]`).classList.add("active");
+            colorPanel.style.display = "flex";
         });
         toolPanel.appendChild(colorInput);
     } else {
@@ -287,15 +296,18 @@ function handleDraw(e) {
 
 function getXY(e) {
     const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
     if (e.touches && e.touches.length) {
         return {
-            x: e.touches[0].clientX - rect.left,
-            y: e.touches[0].clientY - rect.top,
+            x: (e.touches[0].clientX - rect.left) * scaleX,
+            y: (e.touches[0].clientY - rect.top) * scaleY
         };
     }
     return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
+        x: (e.clientX - rect.left) * scaleX,
+        y: (e.clientY - rect.top) * scaleY
     };
 }
 
@@ -401,6 +413,8 @@ toolButtons.forEach(btn => {
 
         if (currentTool === "eraser") {
             ctx.strokeStyle = "#ffffff";
+            // Armazena a ferramenta anterior
+            eraserBtn.dataset.previousTool = currentTool;
         } else {
             ctx.strokeStyle = currentColor;
         }
@@ -423,6 +437,11 @@ eraserBtn.addEventListener("click", function() {
     ctx.strokeStyle = "#ffffff";
     colorPanel.style.display = "none";
     updateBrushSize();
+    
+    // Armazena a ferramenta anterior para poder voltar depois
+    if (currentTool !== "eraser") {
+        this.dataset.previousTool = currentTool;
+    }
 });
 
 eyedropperBtn.addEventListener("click", function() {
