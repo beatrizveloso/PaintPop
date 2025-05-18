@@ -455,4 +455,29 @@ body {
         width: 90%;
         max-width: 300px;
     }
+
+    .confirm-content {
+    padding: 30px;
+    max-width: 350px;
+    height: 210px;
+    font-size: 20px;
+    text-align: center;
+}
+
+    .confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.confirm-buttons button {
+    flex: 1;
+    max-width: 140px;
+}
+
 }
