@@ -75,29 +75,9 @@
       const downloadLink = document.getElementById('download-btn');
 
       if (imageData) {
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = 500;
-        tempCanvas.height = 500;
-        const tempCtx = tempCanvas.getContext('2d');
-        
-        const img = new Image();
-        img.onload = function() {
-          tempCtx.fillStyle = "#ffffff";
-          tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-          tempCtx.drawImage(img, 0, 0);
-          
-          const baseImg = new Image();
-          baseImg.src = `src/images/${new URLSearchParams(window.location.search).get("img") || "bobbie.png"}`;
-          
-          baseImg.onload = function() {
-            tempCtx.drawImage(baseImg, 0, 0);
-            const finalImageData = tempCanvas.toDataURL('image/png');
-            imgElement.src = finalImageData;
-            downloadLink.href = finalImageData;
-            launchConfetti();
-          };
-        };
-        img.src = imageData;
+        imgElement.src = imageData;
+        downloadLink.href = imageData;
+        launchConfetti();
       } else {
         imgElement.alt = "Nenhuma pintura encontrada.";
       }
