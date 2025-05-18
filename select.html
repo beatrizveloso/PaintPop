@@ -21,7 +21,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -221,6 +221,18 @@
       margin-top: 10px;
       display: none;
     }
+
+.carousel-active h1 {
+  margin-top: 30px; 
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .carousel-active h1 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 1.8rem; }
+}
   </style>
 </head>
 
@@ -499,7 +511,7 @@ const carouselIndices = {
 let activeCarousel = null;
 
 function moveCarousel(carousel, index) {
-  const itemWidth = 270; // Largura fixa considerando imagem + margem
+  const itemWidth = 270;
   carousel.querySelector('.carousel').style.transform = `translateX(-${index * itemWidth}px)`;
 }
 
@@ -513,6 +525,7 @@ function showCarousel(folderName) {
   nextBtn.style.display = 'block';
   backBtn.style.display = 'block';
   mainTitle.textContent = `Desenhos de ${folderName}`;
+  document.body.classList.add('carousel-active'); 
 
   const carouselId = `${folderName}Carousel`;
   const carousel = document.getElementById(carouselId);
@@ -534,6 +547,7 @@ function backToFolders() {
   nextBtn.style.display = 'none';
   backBtn.style.display = 'none';
   mainTitle.textContent = 'Escolha uma pasta';
+  document.body.classList.remove('carousel-active'); 
   activeCarousel = null;
 }
 

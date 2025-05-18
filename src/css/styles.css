@@ -121,12 +121,12 @@ body {
     border-radius: 0 50px 50px 0;
     margin-left: 30px;
     overflow-y: auto;
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .tool-panel::-webkit-scrollbar {
-    display: none; 
+    display: none;
 }
 
 .tool-panel.active {
@@ -235,19 +235,19 @@ body {
 }
 
 .confirm-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
-  .loading-overlay {
+.loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -258,119 +258,198 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-  
-  .loading-spinner {
+}
+
+.loading-spinner {
     border: 5px solid #f3f3f3;
     border-top: 5px solid #b1085c;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .confirm-content {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  font-family: 'Baloo 2', sans-serif;
-  border: 4px solid #f06292;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    font-family: 'Baloo 2', sans-serif;
+    border: 4px solid #f06292;
 }
 
 .confirm-content h3 {
-  margin-top: 0;
-  color: #f06292;
-  font-size: 24px;
+    margin-top: 0;
+    color: #f06292;
+    font-size: 24px;
 }
 
 .confirm-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .confirm-buttons button {
-  padding: 10px 25px;
-  border: none;
-  border-radius: 50px;
-  font-family: 'Baloo 2', sans-serif;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 #confirmYes {
-  background-color: #f06292;
-  color: white;
+    background-color: #f06292;
+    color: white;
 }
 
 #confirmYes:hover {
-  background-color: #d81b60;
-  transform: scale(1.05);
+    background-color: #d81b60;
+    transform: scale(1.05);
 }
 
 #confirmNo {
-  background-color: #e0e0e0;
-  color: #333;
+    background-color: #e0e0e0;
+    color: #333;
 }
 
 #confirmNo:hover {
-  background-color: #bdbdbd;
-  transform: scale(1.05);
+    background-color: #bdbdbd;
+    transform: scale(1.05);
 }
 
 @media (max-width: 480px) {
+    body {
+        flex-direction: column;
+    }
+
     .layout {
         flex-direction: column;
-        height: 100vh;
+        height: auto;
+        align-items: center;
     }
 
     .sidebar {
-        width: 120px;
-        border-radius: 0 50px 50px 0;
-        z-index: 10;
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 10px;
+        justify-content: center;
+        gap: 10px;
     }
 
-    .canvas-container {
-        width: 100%;
-        height: 70vh;
-        margin-left: 140px;
-        margin-top: 30px;
+    .tool-btn {
+        width: 60px;
+        height: 60px;
+    }
+
+    .tool-btn img {
+        width: 60px;
+        height: 60px;
     }
 
     .tool-panel {
-        display: none;
-    }
-
-    .buttons {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 20px;
-        position: fixed;
-        bottom: 10px;
+        position: relative;
+        top: 0;
+        left: 0;
         width: 100%;
+        max-height: 50px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        overflow-x: auto;
+        border-radius: 0;
+        display: flex !important;
         padding: 10px;
-        background-color: #ffe0f1;
-        z-index: 10;
     }
 
+    .tool-panel img {
+        width: 105px;
+        height: 50px;
+    }
+
+    .main-area {
+        margin: 0;
+        padding: 10px;
+    }
+
+    .drawing-wrapper {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .canvas-container {
+        width: 75vw;
+        height: 75vw;
+        margin: 0;
+        margin-left: 20px;
+    }
+
+    canvas {
+        width: 75vw;
+        height: 75vw;
+    }
+
+    .right-tab {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px 0;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    #eraser-btn img {
+        width: 90px;
+        height: 50px;
+    }
+
+    #undo-btn img,
+    #save-btn img,
+    .tools-btn,
     .action-button {
-        width: 80px;
-        height: 80px;
+        width: 55px;
+        height: 45px;
     }
 
+    #undo-btn img,
+    #save-btn img,
+    .tools-btn img,
     .action-button img {
         width: 100%;
         height: 100%;
     }
-}
 
+    .brush-size {
+        width: 100%;
+        align-items: center;
+    }
+
+    #brushRange {
+        width: 80%;
+    }
+
+    .confirm-content {
+        width: 90%;
+        max-width: 300px;
+    }
+}
