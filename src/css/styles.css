@@ -370,7 +370,7 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        max-height: 100px;
+        max-height: 50px;
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: center;
@@ -397,17 +397,16 @@ body {
     }
 
     .canvas-container {
-        width: 98vw;
-        height: 98vw;
+        width: 90vw;
+        height: 90vw;
         margin: 0;
-        margin-left: 30px;
         margin-top: 20px;
         margin-bottom: 20px;
     }
 
     canvas {
-        width: 98vw;
-        height: 98vw;
+        width: 90vw;
+        height: 90vw;
     }
 
     .right-tab {
