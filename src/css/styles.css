@@ -346,8 +346,8 @@ body {
 
     .sidebar {
         flex-direction: row;
-        width: 100%;
-        height: auto;
+        width: 460px;
+        max-height: 100px;
         position: relative;
         padding: 10px;
         justify-content: center;
@@ -369,14 +369,14 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        max-height: 50px;
+        max-height: 100px;
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: center;
         overflow-x: auto;
         border-radius: 0;
         display: flex !important;
-        padding: 10px;
+        padding: 16px;
     }
 
     .tool-panel img {
@@ -396,26 +396,28 @@ body {
     }
 
     .canvas-container {
-        width: 75vw;
-        height: 75vw;
+        width: 98vw;
+        height: 98vw;
         margin: 0;
         margin-left: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     canvas {
-        width: 75vw;
-        height: 75vw;
+        width: 98vw;
+        height: 98vw;
     }
 
     .right-tab {
         position: relative;
-        width: 100%;
+        width: 460px;
         height: auto;
         flex-direction: row;
         flex-wrap: wrap;
-        padding: 10px 0;
+        padding: 10px 10px 10px 10px;
         justify-content: center;
-        gap: 5px;
+        gap: 20px;
     }
 
     #eraser-btn img {
